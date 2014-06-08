@@ -35,7 +35,6 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		photoAPI();
-		draw();
 		document.getElementById('status').innerHTML = '';
 	}
 	else if (response.status === 'not_authorized') {
@@ -60,6 +59,7 @@ function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
 		var my_picture_url = response.data.url;
 		$("#my-profile-picture").attr('src', my_picture_url);
+		draw();
 	});
 }
 
@@ -81,6 +81,8 @@ img3.src = "img/typography.png";	//圖像路徑
 function draw() {
 	img.onload = function(){
 		ctx.drawImage(img,0,0);
+		ctx.drawImage(img2,0,0);
+		ctx.drawImage(img3,0,0);
     }
 }
 
