@@ -58,8 +58,8 @@ function checkLoginState() {
 function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
 		var my_picture_url = response.data.url;
-		ctx.drawImage(my_picture_url,100,100);
-		//$("#my-profile-picture").attr('src', my_picture_url);
+		$("#my-profile-picture").attr('src', my_picture_url);
+		$("#canvas").attr('src', my_picture_url);
 	});
 }
 
