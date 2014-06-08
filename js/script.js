@@ -79,11 +79,9 @@ var img3 = new Image();				//新增圖像3
 img3.src = "img/typography.png";	//圖像路徑
 	
 function draw() {
-	img.onload = function(){
-		ctx.drawImage(img,0,0);
-		ctx.drawImage(img2,0,0);
-		ctx.drawImage(img3,0,0);
-    }
+	ctx.drawImage(img,0,0);
+	//ctx.drawImage(img2,0,0);
+	//ctx.drawImage(img3,0,0);
 }
 
 //宣告基本變數
