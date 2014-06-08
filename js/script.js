@@ -59,7 +59,8 @@ function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
 		var my_picture_url = response.data.url;
 		$("#my-profile-picture").attr('src', my_picture_url);
-		$("#canvas").attr('src', my_picture_url);
+		var TEST = document.getElementById("my-profile-picture");
+		ctx.drawImage(TEST,10,10);
 	});
 }
 
