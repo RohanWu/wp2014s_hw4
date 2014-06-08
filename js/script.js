@@ -60,6 +60,9 @@ function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
 		var my_picture_url = response.data.url;
 		$("#my-profile-picture").attr('src', my_picture_url);
+		var img = new Image();			// 新增圖像1
+		img.src = my_picture_url;		//圖像路徑（路徑自己設，且自己加入想要的圖層）
+		ctx.drawImage(img,0,0);
 		ctx.drawImage(img2,0,0);
 		ctx.drawImage(img3,0,0);
 	});
