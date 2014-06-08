@@ -35,18 +35,15 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		photoAPI();
-		var msg = "";
-		$("status").html(msg);
+		document.getElementById('status').innerHTML = '';
 	}
 	else if (response.status === 'not_authorized') {
 		// The person is logged into Facebook, but not your app.
-		var msg = "Please log into this app.";
-		$("status").html(msg);
+		document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
 	}
 	else {
 		// The person is not logged into Facebook.
-		var msg = "Please log into Facebook.";
-		$("status").html(msg);
+		document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
 	}
 }
 
