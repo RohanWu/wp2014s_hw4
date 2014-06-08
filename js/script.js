@@ -35,6 +35,7 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		photoAPI();
+		draw();
 		document.getElementById('status').innerHTML = '';
 	}
 	else if (response.status === 'not_authorized') {
