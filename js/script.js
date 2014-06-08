@@ -71,14 +71,18 @@ ctx.font='20px "Arial"'; //設定字體與大小
 ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
 
 var img = new Image();				// 新增圖像1
-img.src = "img/overlay.png";		//圖像路徑（路徑自己設，且自己加入想要的圖層）
-
+img.src = $("#my-profile-picture").attr('src');		//圖像路徑（路徑自己設，且自己加入想要的圖層）
 var img2 = new Image();				//新增圖像2
 img2.src = "img/overlayback.png";	//圖像路徑
-
 var img3 = new Image();				//新增圖像3
 img3.src = "img/typography.png";	//圖像路徑
 	
+function draw() {
+	img.onload = function(){
+		ctx.drawImage(img,0,0);
+    }
+}
+
 //宣告基本變數
 var canvas=document.getElementById("canvas"); //宣告變數找到canvas標籤
 var ctx=canvas.getContext("2d"); //找到2d內容
