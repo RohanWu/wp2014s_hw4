@@ -17,6 +17,7 @@ window.fbAsyncInit = function() {
     });
 };
 
+
 // Load the SDK asynchronously
 (function(d, s, id){
 	var js, fjs = d.getElementsByTagName(s)[0];
@@ -26,34 +27,36 @@ window.fbAsyncInit = function() {
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
 function statusChangeCallback(response) {
 	console.log('statusChangeCallback');
 	console.log(response);
-	var msg;
 	// The response object is returned with a status field that lets the app know the current login status of the person.
 	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		photoAPI();
-		msg = "";
+		var msg = "";
 		$("status").html(msg);
 	}
 	else if (response.status === 'not_authorized') {
 		// The person is logged into Facebook, but not your app.
-		msg = "Please log into this app.";
+		var msg = "Please log into this app.";
 		$("status").html(msg);
 	}
 	else {
 		// The person is not logged into Facebook.
-		msg = "Please log into Facebook.";
+		var msg = "Please log into Facebook.";
 		$("status").html(msg);
 	}
 }
+
 
 function checkLoginState() {
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
 	});
 }
+
 
 function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
