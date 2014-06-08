@@ -35,7 +35,6 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		photoAPI();
-		draw();
 		document.getElementById('status').innerHTML = '';
 	}
 	else if (response.status === 'not_authorized') {
@@ -62,9 +61,9 @@ function photoAPI() {
 		$("#my-profile-picture").attr('src', my_picture_url);
 		var img = new Image();			// 新增圖像1
 		img.src = my_picture_url;		//圖像路徑（路徑自己設，且自己加入想要的圖層）
-		ctx.drawImage(img,0,0);
+		ctx.drawImage(img,40,40);
 		ctx.drawImage(img2,0,0);
-		ctx.drawImage(img3,0,0);
+		ctx.drawImage(img3,50,70);
 	});
 }
 
@@ -83,10 +82,6 @@ img2.src = "img/overlayback.png";	//圖像路徑
 var img3 = new Image();				//新增圖像3
 img3.src = "img/typography.png";	//圖像路徑
 	
-function draw() {
-	//ctx.drawImage(img,0,0);
-}
-
 //宣告基本變數
 var canvas=document.getElementById("canvas"); //宣告變數找到canvas標籤
 var ctx=canvas.getContext("2d"); //找到2d內容
