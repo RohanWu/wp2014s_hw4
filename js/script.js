@@ -60,6 +60,8 @@ function photoAPI() {
 	FB.api('/me/picture?width=250', function(response) {
 		var my_picture_url = response.data.url;
 		$("#my-profile-picture").attr('src', my_picture_url);
+		ctx.drawImage(img2,0,0);
+		ctx.drawImage(img3,0,0);
 	});
 }
 
@@ -80,8 +82,6 @@ img3.src = "img/typography.png";	//圖像路徑
 	
 function draw() {
 	//ctx.drawImage(img,0,0);
-	ctx.drawImage(img2,0,0);
-	ctx.drawImage(img3,0,0);
 }
 
 //宣告基本變數
