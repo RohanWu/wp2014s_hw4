@@ -14,7 +14,6 @@ window.fbAsyncInit = function() {
 	// Additional initialization code such as adding Event Listeners goes here
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
-		PostImageToFacebook(response);
     });
 };
 
