@@ -23,15 +23,6 @@
             #canvas {border: 3px solid grey;}
         </style>
     
-        <IfModule mod_setenvif.c>
-            <IfModule mod_headers.c>
-                <FilesMatch "\.(cur|gif|ico|jpe?g|png|svgz?|webp)$">
-                    SetEnvIf Origin ":" IS_CORS
-                    Header set Access-Control-Allow-Origin "*" env=IS_CORS
-                </FilesMatch>
-            </IfModule>
-        </IfModule>
-
     </head>
 
     <body>
@@ -71,7 +62,7 @@
                 <textarea name="inputed" maxlength="6" id="inputed" placeholder="限輸6字"></textarea><!-- 提供使用者輸入文字欄-->
             </label>
             <br/>
-            <button id="sentimg" onClick="PostImageToFacebook()">Post to Facebook</button><!-- 傳送按鈕-->
+            <button id="sentimg" onclick="checkPostState()">Post to Facebook</button><!-- 傳送按鈕-->
         </div>
     
         <div class="info"></div><!-- 訊息欄位-->
