@@ -119,7 +119,7 @@ function handleMouseMove(e){	//滑鼠移動的event
 		profileIMG.crossOrigin = "Anonymous";		// 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
 		//canvas.width = profileIMG.width;		//設定canvas的大小需符合profileimg的大小
 		//canvas.height = profileIMG.height;
-		ctx.drawImage(profileIMG,120,110);	//從XY軸0，0值開始畫如profileimg
+		ctx.drawImage(profileIMG,135,110);	//從XY軸0，0值開始畫如profileimg
 		ctx.drawImage(img3,canMouseX-128/2,canMouseY-120/2);	//劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 		ctx.drawImage(img2,0,0);		//劃入img2
 		var inputedText = $('#inputed').val();		//抓取頁面inputed ID的內容
@@ -136,3 +136,67 @@ $("#canvas").mouseup(function(e){handleMouseUp(e);});
 $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
 // 以上為canvas的程式碼
+
+
+/// Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法
+function checkPostState() {
+	FB.getLoginStatus(function(response) {
+		var accessToken = response.authResponse.accessToken;
+		PostImageToFacebook(accessToken);
+	});
+}
+
+function PostImageToFacebook(accessToken) {
+	$('.info').append('<img src="img/loading.gif"/>')	// 載入loading的img
+    var canvas = document.getElementById("canvas");		// 找canvas
+    var imageData = canvas.toDataURL("image/png");		// 把canvas轉換PNG
+    try {
+        blob = dataURItoBlob(imageData);	// 把影像載入轉換函數
+    }
+    catch (e) {
+        console.log(e);		// 錯誤訊息的log
+    }
+    var fd = new FormData();
+    fd.append("access_token", accessToken);	// 請思考accesstoken要怎麼傳到這function內
+    fd.append("source", blob);		// 輸入的照片
+    fd.append("message", "這是HTML5 canvas和Facebook API結合教學");	// 輸入的訊息
+    try {
+        $.ajax({
+            url: "https://graph.facebook.com/me/photos?access_token=" + accessToken,	// GraphAPI Call
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                console.log("success " + data);		// 成功log + photoID
+                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
+            },
+            error: function (shr, status, data) {
+                $(".info").html("error " + data + " Status " + shr.status);		// 如果錯誤把訊息傳到class info內
+            },
+            complete: function () {
+                $(".info").append("Posted to facebook");	// 完成後把訊息傳到HTML的div內
+            }
+        });
+
+    }
+    catch (e) {
+        console.log(e);		// 錯誤訊息的log
+    }
+}
+
+// Convert a data URI to blob把影像載入轉換函數
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {
+        type: 'image/png'
+    });
+}
+
+// ~
