@@ -3,6 +3,7 @@
 <html>
 
     <head>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <meta name="description" content="THIS IS FOR NCCUCS WEB PROGRAMMING.">
@@ -21,6 +22,16 @@
         <style>
             #canvas {border: 3px solid grey;}
         </style>
+    
+        <IfModule mod_setenvif.c>
+            <IfModule mod_headers.c>
+                <FilesMatch "\.(cur|gif|ico|jpe?g|png|svgz?|webp)$">
+                    SetEnvIf Origin ":" IS_CORS
+                    Header set Access-Control-Allow-Origin "*" env=IS_CORS
+                </FilesMatch>
+            </IfModule>
+        </IfModule>
+
     </head>
 
     <body>
