@@ -143,6 +143,7 @@ function checkPostState() {
 	FB.getLoginStatus(function(response) {
 		var accessToken = response.authResponse.accessToken;
 		PostImageToFacebook(accessToken);
+		console.log(accessToken);
 		/*
 		if(response.status === 'connected') {
 			var accessToken = response.authResponse.accessToken;
