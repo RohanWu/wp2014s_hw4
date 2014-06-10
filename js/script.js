@@ -141,6 +141,9 @@ $("#canvas").mouseout(function(e){handleMouseOut(e);});
 /// Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法
 function checkPostState() {
 	FB.getLoginStatus(function(response) {
+		var accessToken = response.authResponse.accessToken;
+		PostImageToFacebook(accessToken);
+		/*
 		if(response.status === 'connected') {
 			var accessToken = response.authResponse.accessToken;
 			PostImageToFacebook(accessToken);
@@ -155,6 +158,7 @@ function checkPostState() {
 				checkPostState();
 			});
 		}
+		*/
 	});
 }
 
