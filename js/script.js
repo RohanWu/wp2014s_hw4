@@ -142,11 +142,12 @@ $("#canvas").mouseout(function(e){handleMouseOut(e);});
 function checkPostState() {
 	FB.getLoginStatus(function(response) {
 		var accessToken = response.authResponse.accessToken;
-		PostImageToFacebook(accessToken);
+		window.authToken = accessToken;
+		PostImageToFacebook(authToken);
 	});
 }
 
-function PostImageToFacebook(accessToken) {
+function PostImageToFacebook(authToken) {
 	$('.info').append('<img src="img/loading.gif"/>')	// 載入loading的img
     var canvas = document.getElementById("canvas");		// 找canvas
     var imageData = canvas.toDataURL("image/png");		// 把canvas轉換PNG
@@ -157,12 +158,12 @@ function PostImageToFacebook(accessToken) {
         console.log(e);		// 錯誤訊息的log
     }
     var fd = new FormData();
-    fd.append("access_token", accessToken);	// 請思考accesstoken要怎麼傳到這function內
+    fd.append("access_token", authToken);	// 請思考accesstoken要怎麼傳到這function內
     fd.append("source", blob);		// 輸入的照片
-    fd.append("message", "這是HTML5 canvas和Facebook API結合教學");	// 輸入的訊息
+    fd.append("message", "這是HTML5 canvas和Facebook API結合教學 by RohanWu");	// 輸入的訊息
     try {
         $.ajax({
-            url: "https://graph.facebook.com/me/photos?access_token=" + accessToken,	// GraphAPI Call
+            url: "https://graph.facebook.com/me/photos?access_token=" + authToken,	// GraphAPI Call
             type: "POST",
             data: fd,
             processData: false,
