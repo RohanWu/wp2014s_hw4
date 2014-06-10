@@ -143,7 +143,7 @@ function checkPostState() {
 	FB.getLoginStatus(function(response) {
 		var accessToken = response.authResponse.accessToken;
 		window.authToken = accessToken;
-		PostImageToFacebook(authToken);
+		PostImageToFacebook(window.authToken);
 	});
 }
 
